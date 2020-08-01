@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Notebook</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="notebook.css">
+
+</head>
+
+<body>
+  <div id="content-wrap">
+    <button onclick="darkMode()" class="addButton">DAY/NIGHT</button>
+
+  <h1>What's up today?</h1>
+
+  <textarea type="text" id="heading" rows="1" placeholder="Heading (optional)"></textarea><br>
+
+  <textarea type="text" id="field" rows="20" placeholder="Paragraph"></textarea><br>
+
+  <button id="add" class="addButton">ADD</button>
+  <br><br>
+  <table id="datelist">
+    <tbody>
+    </tbody>
+  </table>
+  <ol id="fruitlist">
+  </ol>
+
+ <script>
+
+ $(document).ready(function(){
+    $("#add").click(function(){
+        var today = new Date();
+        var date = today.getDate()+"."+(today.getMonth()+1)+"."+today.getFullYear();
+        var heading = $("#heading").val();
+        var paragraph = $("#field").val();
+        if (paragraph != ""){
+          $("#datelist tbody").prepend($("<tr><td>"+ date +"</td><td>"+ paragraph + "</td><td><button type='button' class='remove btn'>REMOVE PARAGRAPH</button></td><tr>"));
+          $("#field").val("");
+        }
+        if (heading != ""){
+          $("#datelist tbody").prepend($("<tr><td>"+ "&emsp;&emsp;&emsp;&emsp;" +"</td><th>"+ heading + "</th><td><button type='button' class='remove btn'>REMOVE HEADING</button></td><tr>"));
+          $("#heading").val("");
+        }
+    });
+    $(document).on("click", "button.remove", function(){
+        if (confirm("Remove entry?")) {
+            $(this).closest("tr").remove();
+            return false;
+        }
+ 	  });
+});
+
+
+ function darkMode() {
+  var element = document.body;
+  element.classList.toggle("darkMode");
+}
+</script>
+
+  </div>
+
+ <footer>
+ Feel free to use and re-use this webpage and its elements.
+ </footer>
+
+</body>
+
+</html>
